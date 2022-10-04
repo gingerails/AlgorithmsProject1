@@ -11,10 +11,34 @@ public class RunSortingAlgos {
      * @throws IOException
      */
     public void runner() throws IOException {
-        Double[] inputArray = readInputIntoArray();
-        createMergeSortedFile(inputArray);
+        Double[] merge_inputArray = readInputIntoArray();
+        Double[] quick_inputArray = new Double[merge_inputArray.length];
+
+        // Copy the array into quick_inputArray before performing mergesort and quicksort
+        System.arraycopy(merge_inputArray, 0, quick_inputArray, 0, merge_inputArray.length);
+
+        createMergeSortedFile(merge_inputArray);
+        createQuickSortedFile(quick_inputArray);
 
     }
+    /**
+     *
+     * @param inputArray
+     * @throws FileNotFoundException
+     */
+    public void createQuickSortedFile(Double[] inputArray) throws FileNotFoundException {
+        PrintWriter write = new PrintWriter(new File("aik0002_quick.txt"));
+        int length = inputArray.length;
+        QuickSort quickSort = new QuickSort();
+
+        int counter =  quickSort.quickSort(inputArray, 0, length-1);
+        write.println("Number of comparisons made: " + counter);
+        for(int i = 0; i < inputArray.length; i++) {
+            write.println( inputArray[i]);
+        }
+        write.close();
+    }
+
 
     /**
      *
@@ -23,8 +47,10 @@ public class RunSortingAlgos {
      */
     public void createMergeSortedFile(Double[] inputArray) throws FileNotFoundException {
         PrintWriter write = new PrintWriter(new File("aik0002_merge.txt"));
-        MergeSort mergeSort = new MergeSort();
-        mergeSort.sort(inputArray);
+        MergeSortBasic mergeSort = new MergeSortBasic();
+        int length = inputArray.length;
+        int counter = mergeSort.mergeSort(inputArray, length);
+        write.println("Number of comparisons made: " + counter);
         for(int i = 0; i < inputArray.length; i++) {
             write.println( inputArray[i]);
         }

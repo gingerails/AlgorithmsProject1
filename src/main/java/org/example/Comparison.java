@@ -65,18 +65,31 @@ public class Comparison {
         }
     }
 
+
+    /**
+     * Comparison counter.
+     * To make sure I was only updating this each time the comparison function is called,
+     * I kept it as a static variable of the comparison obj that was updated on each function call
+     */
+    static int comparison_counter = 0;
+    public int increaseCounter(int comparison_counter){
+        comparison_counter = comparison_counter + 1;
+
+        return comparison_counter;
+    }
+
     /**
      *
-     * @param array
      * @param i
      * @param j
      * @param op
      * @return
      */
-    public boolean comparison(Double[] array, int i, int j, Operator op, int comparison_count){
-        comparison_count = comparison_count + 1;
-        System.out.print(array[i]);
-        System.out.print (op.apply(array[i], array[j]));
-        return op.apply(array[i], array[j]);
+    public boolean comparison(double i, double j, Operator op, int comparison_counter){
+       // increaseCounter(comparison_counter);
+        //comparison_counter = comparison_counter + 1;
+//        System.out.print (op.apply(i, j));
+//        System.out.print (comparison_count);
+        return op.apply(i, j);
     }
 }
