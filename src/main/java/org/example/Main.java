@@ -13,10 +13,6 @@ import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        //    For generating my own test input files:
-//        GenerateFile generateFile = new GenerateFile();
-//        generateFile.generateFile();
-        // Runner creates mergesort and quicksort output files
         RunSortingAlgos runner = new RunSortingAlgos();
         runner.runner();
     }

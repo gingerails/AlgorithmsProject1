@@ -4,44 +4,60 @@ import static org.example.Comparison.Operator.*;
 
 public class MergeSort {
     static Comparison compare = new Comparison();
-    static int comparison_counter;
+    static int comparison_counter = 0;
 
-    public static void sort(Double[] a) {
-        Double[] helper = new Double[a.length];
-        sort(a, 0, a.length - 1, helper);
-        //   Map map = new HashMap<>();
+    public static int mergeSort(Double[] a, int n) {
+        if (n < 2) {
+            return n;
+        }
+        int mid = n / 2;
+        Double[] l = new Double[mid];
+        Double[] r = new Double[n - mid];
+
+        for (int i = 0; i < mid; i++) {
+            l[i] = a[i];
+        }
+        for (int i = mid; i < n; i++) {
+            r[i - mid] = a[i];
+        }
+        mergeSort(l, mid);
+        mergeSort(r, n - mid);
+
+        merge(a, l, r, mid, n - mid);
+        return n;
     }
 
-    private static void sort(Double[] a, double lo, double hi, Double[] helper) {
-        if (compare.comparison(lo, hi, GREATER_EQUAL, comparison_counter)) {
-            System.out.println("somehow 0 is greater than 999");
-            return;
+    /***
+     * The way I am counting comparisons is calling a function which increases the number of comparisons by one.
+     * @param a
+     * @param l
+     * @param r
+     * @param left
+     * @param right
+     * @return
+     */
+    public static int merge( Double[] a, Double[] l, Double[] r, double left, double right) {
+
+        int i = 0, j = 0, k = 0;
+        while ((compare.comparison(i, left, LESS, comparison_counter)) && (compare.comparison(j, right, LESS, comparison_counter))) {
+            comparison_counter = compare.increaseCounter(comparison_counter);
+            comparison_counter = compare.increaseCounter(comparison_counter);
+            if (compare.comparison(l[i], r[j], LESS_EQUAL, comparison_counter)){
+                comparison_counter = compare.increaseCounter(comparison_counter);
+                a[k++] = l[i++];
+            }
+            else {
+                a[k++] = r[j++];
+            }
         }
-        double mid = lo + (hi - lo) / 2;
-        sort(a, lo, mid, helper);
-        sort(a, mid + 1, hi, helper);
-        merge(a, lo, mid, hi, helper);
+        while (compare.comparison(i, left, LESS, comparison_counter)){
+            comparison_counter = compare.increaseCounter(comparison_counter);
+            a[k++] = l[i++];
+        }
+        while (compare.comparison(j, right, LESS, comparison_counter)){
+            comparison_counter = compare.increaseCounter(comparison_counter);
+            a[k++] = r[j++];
+        }
+        return comparison_counter;
     }
-
-    private static void merge(Double[] a, double lo, double mid, double hi, Double[] helper) {
-
-        for (double i = lo; i <= hi; i++){
-            helper[(int) i] = a[(int) i];
-        }
-        double i = lo;
-        double j = mid + 1;
-
-        for (double k = lo; k <= hi; k++) {
-            if (compare.comparison(i, mid, GREATER, comparison_counter))
-                a[(int) k] = helper[(int) j++];
-            else if (compare.comparison(j, hi, GREATER_EQUAL, comparison_counter))
-                a[(int) k] = helper[(int) i++];
-            else if (compare.comparison(helper[(int) i], helper[(int) j], LESS_EQUAL, comparison_counter))
-                a[(int) k] = helper[(int) i++];
-            else
-                a[(int) k] = helper[(int) j++];
-        }
-
-    }
-
 }

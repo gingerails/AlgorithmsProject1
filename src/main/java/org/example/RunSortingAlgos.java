@@ -47,7 +47,7 @@ public class RunSortingAlgos {
      */
     public void createMergeSortedFile(Double[] inputArray) throws FileNotFoundException {
         PrintWriter write = new PrintWriter(new File("aik0002_merge.txt"));
-        MergeSortBasic mergeSort = new MergeSortBasic();
+        MergeSort mergeSort = new MergeSort();
         int length = inputArray.length;
         int counter = mergeSort.mergeSort(inputArray, length);
         write.println("Number of comparisons made: " + counter);
