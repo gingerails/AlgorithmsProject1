@@ -1,3 +1,11 @@
+/****
+ * File: RunSortingAlgos.java
+ * This class is called by the method in Main().
+ * Runner method caReads input.txt into an array
+ */
+
+
+
 package org.example;
 
 import java.io.*;
@@ -7,7 +15,8 @@ import java.util.List;
 public class RunSortingAlgos {
 
     /**
-     * Main entry point of class
+     * Main entry point of class. Reads the text file into an array (merge_inputArray); Copies this array into quick_inputArray.
+     * These arrays are fed into createMergeSortedFile and createQuickSortedFile.
      * @throws IOException
      */
     public void runner() throws IOException {
@@ -22,7 +31,7 @@ public class RunSortingAlgos {
 
     }
     /**
-     *
+     * Creates text file for quicksort output. Performs quicksort on the inputArray. quicksort() returns the number of comparisons made.
      * @param inputArray
      * @throws FileNotFoundException
      */
