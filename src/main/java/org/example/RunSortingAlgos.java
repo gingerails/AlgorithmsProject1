@@ -1,10 +1,10 @@
 /****
  * File: RunSortingAlgos.java
  * This class is called by the method in Main().
- * Runner method caReads input.txt into an array
+ * Runner method reads input.txt into an array of doubles.
+ * The array and a copy of the array are each sorted via mergesort and quicksort.
+ * Output of these sorts are put in a file for each.
  */
-
-
 
 package org.example;
 
@@ -50,7 +50,7 @@ public class RunSortingAlgos {
 
 
     /**
-     *
+     *Creates text file for mergesort output. Performs mergesort on the inputArray. mergesort() returns the number of comparisons made.
      * @param inputArray
      * @throws FileNotFoundException
      */

@@ -1,34 +1,43 @@
 package org.example;
 
-import static org.example.Comparison.Operator.*;
-import static org.example.Comparison.Operator.LESS_EQUAL;
-
+/**
+ * LESS than comparison method used via compare.less(x1,x2)
+ */
 public class QuickSort {
 
     static Comparison compare = new Comparison();
-    static int comparison_counter = 0;
 
+    /**
+     *
+     * @param arr
+     * @param begin
+     * @param end
+     * @return
+     */
     public int quickSort(Double arr[], double begin, double end) {
-        if(compare.comparison(begin, end, LESS, comparison_counter)){
-            comparison_counter = compare.increaseCounter(comparison_counter);
-
+        if (compare.less(begin, end)){
             int partitionIndex = partition(arr, begin, end);
 
             quickSort(arr, begin, partitionIndex-1);
             quickSort(arr, partitionIndex+1, end);
         }
-        return comparison_counter;
+        return compare.comparison_counter;      // return number of comparisons made
     }
 
+    /**
+     *
+     * @param arr
+     * @param begin
+     * @param end
+     * @return partition index
+     */
     private int partition(Double arr[], double begin, double end) {
         double pivot = arr[(int) end];
         double i = (begin-1);
 
         for (double j = begin; j < end; j++) {
-            if (compare.comparison(arr[(int) j],pivot, LESS_EQUAL, comparison_counter)){
-                comparison_counter = compare.increaseCounter(comparison_counter);
+            if (!compare.less(pivot, arr[(int) j])){  // originally arr[(int) j] <= pivot.
                 i++;
-
                 double swapTemp = arr[(int) i];
                 arr[(int) i] = arr[(int) j];
                 arr[(int) j] = swapTemp;
